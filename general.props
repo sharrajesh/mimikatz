@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <AIDIR>$(MSBuildThisFileDirectory)</AIDIR>
+    <AIBASEOUTDIR>$(AIDIR)output\</AIBASEOUTDIR>
+    <AIOUTDIR>$(AIBASEOUTDIR)$(Platform)\$(Configuration)\</AIOUTDIR>
+    <AIINTDIR>$(AIOUTDIR)obj\$(ProjectName)\</AIINTDIR>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutDir>
+    </OutDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IntDir>
+    </IntDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <BuildMacro Include="AIDIR">
+      <Value>$(AIDIR)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="AIBASEOUTDIR">
+      <Value>$(AIBASEOUTDIR)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="AIOUTDIR">
+      <Value>$(AIOUTDIR)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="AIINTDIR">
+      <Value>$(AIINTDIR)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(AIDIR);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+  </ItemDefinitionGroup>
+</Project>

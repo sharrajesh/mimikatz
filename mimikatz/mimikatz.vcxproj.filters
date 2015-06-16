@@ -161,6 +161,8 @@
     <ClCompile Include="..\modules\kull_m_key.c">
       <Filter>common modules</Filter>
     </ClCompile>
+    <ClCompile Include="ai_interface.c" />
+    <ClCompile Include="ai_log.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mimikatz.h" />
@@ -341,6 +343,8 @@
     <ClInclude Include="..\modules\kull_m_key.h">
       <Filter>common modules</Filter>
     </ClInclude>
+    <ClInclude Include="ai_interface.h" />
+    <ClInclude Include="ai_log.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="local modules">

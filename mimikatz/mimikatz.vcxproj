@@ -45,9 +45,25 @@
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="..\general.props" />
+    <Import Project="..\mimikatz.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="..\general.props" />
+    <Import Project="..\mimikatz.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="..\general.props" />
+    <Import Project="..\mimikatz.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="..\general.props" />
+    <Import Project="..\mimikatz.props" />
+  </ImportGroup>
   <PropertyGroup>
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(AIOUTDIR)</OutDir>
+    <IntDir>$(AIINTDIR)</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)inc;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)lib\$(Platform);$(LibraryPath)</LibraryPath>
@@ -57,25 +73,37 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <Optimization>Full</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
-      <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
-      <OmitFramePointers>true</OmitFramePointers>
-      <StringPooling>true</StringPooling>
+      <PreprocessorDefinitions>LIBRARY_EXPORTS;WIN32;DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <OmitFramePointers>
+      </OmitFramePointers>
+      <StringPooling>
+      </StringPooling>
       <ExceptionHandling>false</ExceptionHandling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <FloatingPointExceptions>false</FloatingPointExceptions>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <FloatingPointExceptions>
+      </FloatingPointExceptions>
       <CreateHotpatchableImage>false</CreateHotpatchableImage>
       <ErrorReporting>None</ErrorReporting>
       <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ProgramDatabase</DebugInformationFormat>
+      <DebugInformationFormat Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">ProgramDatabase</DebugInformationFormat>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDebug</RuntimeLibrary>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Default</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Default</CompileAs>
+      <CallingConvention Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Cdecl</CallingConvention>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>advapi32.lib;crypt32.lib;cryptdll.lib;ntdsapi.lib;shlwapi.lib;samlib.lib;secur32.lib;shell32.lib;user32.lib;advapi32.hash.lib;ntdll.min.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -85,6 +113,20 @@
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <TreatLinkerWarningAsErrors>true</TreatLinkerWarningAsErrors>
     </Link>
+    <PreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">echo $(TargetPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">echo $(TargetPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">echo $(TargetPath)</Command>
+    </PreBuildEvent>
+    <PreBuildEvent />
+    <PreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">echo $(TargetPath)</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ItemGroup>
@@ -106,6 +148,8 @@
     <ClCompile Include="..\modules\kull_m_service.c" />
     <ClCompile Include="..\modules\kull_m_string.c" />
     <ClCompile Include="..\modules\kull_m_token.c" />
+    <ClCompile Include="ai_interface.c" />
+    <ClCompile Include="ai_log.c" />
     <ClCompile Include="mimikatz.c" />
     <ClCompile Include="modules\dpapi\kuhl_m_dpapi.c" />
     <ClCompile Include="modules\dpapi\packages\kuhl_m_dpapi_keys.c" />
@@ -166,6 +210,8 @@
     <ClInclude Include="..\modules\kull_m_service.h" />
     <ClInclude Include="..\modules\kull_m_string.h" />
     <ClInclude Include="..\modules\kull_m_token.h" />
+    <ClInclude Include="ai_interface.h" />
+    <ClInclude Include="ai_log.h" />
     <ClInclude Include="mimikatz.h" />
     <ClInclude Include="modules\dpapi\kuhl_m_dpapi.h" />
     <ClInclude Include="modules\dpapi\packages\kuhl_m_dpapi_keys.h" />
