@@ -148,6 +148,33 @@ void kull_m_string_wprintf_hex(LPCVOID lpData, DWORD cbData, DWORD flags)
 		kprintf(L"\n};\n");
 }
 
+void kull_m_string_wprintf_hex_ai(LPCVOID lpData, DWORD cbData, DWORD flags, wchar_t *buffer, DWORD bufferLength)
+{
+	DWORD i, sep = flags >> 16;
+	PCWCHAR pType = WPRINTF_TYPES[flags & 0x0000000f];
+
+	if ((flags & 0x0000000f) == 2)
+		kprintf(L"\nBYTE data[] = {\n\t");
+
+	for (i = 0; i < cbData; i++)
+	{
+		kprintf(pType, ((LPCBYTE)lpData)[i]);
+		if (bufferLength) {
+			_snwprintf_s(buffer, bufferLength, _TRUNCATE, pType, ((LPCBYTE)lpData)[i]);
+			buffer += 2;
+			bufferLength -= 2;
+		}
+		if (sep && !((i + 1) % sep))
+		{
+			kprintf(L"\n");
+			if ((flags & 0x0000000f) == 2)
+				kprintf(L"\t");
+		}
+	}
+	if ((flags & 0x0000000f) == 2)
+		kprintf(L"\n};\n");
+}
+
 void kull_m_string_displayFileTime(IN PFILETIME pFileTime)
 {
 	SYSTEMTIME st;
@@ -190,6 +217,18 @@ void kull_m_string_displaySID(IN PSID pSid)
 	if(ConvertSidToStringSid(pSid, &stringSid))
 	{
 		kprintf(L"%s", stringSid);
+		LocalFree(stringSid);
+	}
+	else PRINT_ERROR_AUTO(L"ConvertSidToStringSid");
+}
+
+void kull_m_string_displaySID_ai(IN PSID pSid, wchar_t* sid, DWORD sidLength)
+{
+	LPWSTR stringSid;
+	if (ConvertSidToStringSid(pSid, &stringSid))
+	{
+		kprintf(L"%s", stringSid);
+		_snwprintf_s(sid, sidLength, _TRUNCATE, L"%s", stringSid);
 		LocalFree(stringSid);
 	}
 	else PRINT_ERROR_AUTO(L"ConvertSidToStringSid");

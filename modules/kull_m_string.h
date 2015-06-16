@@ -55,10 +55,12 @@ BOOL kull_m_string_stringToHex(IN LPCWCHAR string, IN LPBYTE hex, IN DWORD size)
 BOOL kull_m_string_stringToHexBuffer(IN LPCWCHAR string, IN LPBYTE *hex, IN DWORD *size);
 
 void kull_m_string_wprintf_hex(LPCVOID lpData, DWORD cbData, DWORD flags);
+void kull_m_string_wprintf_hex_ai(LPCVOID lpData, DWORD cbData, DWORD flags, wchar_t *buffer, DWORD bufferLength);
 void kull_m_string_displayFileTime(IN PFILETIME pFileTime);
 void kull_m_string_displayLocalFileTime(IN PFILETIME pFileTime);
 void kull_m_string_displayGUID(IN LPCGUID pGuid);
 void kull_m_string_displaySID(IN PSID pSid);
+void kull_m_string_displaySID_ai(IN PSID pSid, wchar_t* sid, DWORD sidLength);
 PWSTR kull_m_string_getRandomGUID();
 void kull_m_string_ptr_replace(PVOID ptr, DWORD64 size);
 
