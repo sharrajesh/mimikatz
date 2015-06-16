@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Second_Release_PowerShell|Win32">
-      <Configuration>Second_Release_PowerShell</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Second_Release_PowerShell|x64">
-      <Configuration>Second_Release_PowerShell</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
@@ -26,18 +26,19 @@
     <SccAuxPath>Svn</SccAuxPath>
     <SccLocalPath>Svn</SccLocalPath>
     <SccProvider>SubversionScc</SccProvider>
+    <ProjectName>mk</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration">
-    <ConfigurationType Condition="'$(Configuration)' != 'Second_Release_PowerShell'">Application</ConfigurationType>
+    <ConfigurationType Condition="'$(Configuration)' != 'Second_Release_PowerShell'">DynamicLibrary</ConfigurationType>
     <ConfigurationType Condition="'$(Configuration)' == 'Second_Release_PowerShell'">DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v100</PlatformToolset>
     <PlatformToolset Condition="'$(VCTargetsPath11)' != ''">v110_xp</PlatformToolset>
-    <PlatformToolset Condition="'$(VCTargetsPath12)' != ''">v120_xp</PlatformToolset>
-    <UseOfMfc>static</UseOfMfc>
+    <PlatformToolset Condition="'$(VCTargetsPath12)' != ''">v100</PlatformToolset>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="Exists('$(VCTargetsPath)\Platforms\$(Platform)\PlatformToolsets\ddk2003') Or Exists('$(VCTargetsPath)\..\Platforms\$(Platform)\PlatformToolsets\ddk2003')">
     <PlatformToolset>ddk2003</PlatformToolset>
@@ -45,8 +46,8 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <PropertyGroup>
-    <OutDir>$(SolutionDir)$(Platform)\</OutDir>
-    <IntDir>$(Platform)\</IntDir>
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)inc;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)lib\$(Platform);$(LibraryPath)</LibraryPath>

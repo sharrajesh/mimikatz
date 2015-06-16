@@ -1,4 +1,7 @@
+/x64
 /Win32
 /mimikatz/Win32
+/mimikatz/x64
 *.opensdf
 *.sdf
+*.suo
