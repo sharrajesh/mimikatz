@@ -163,6 +163,7 @@
     </ClCompile>
     <ClCompile Include="ai_interface.c" />
     <ClCompile Include="ai_log.c" />
+    <ClCompile Include="dllmain.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mimikatz.h" />

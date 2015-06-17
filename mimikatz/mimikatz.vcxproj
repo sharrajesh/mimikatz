@@ -150,6 +150,7 @@
     <ClCompile Include="..\modules\kull_m_token.c" />
     <ClCompile Include="ai_interface.c" />
     <ClCompile Include="ai_log.c" />
+    <ClCompile Include="dllmain.c" />
     <ClCompile Include="mimikatz.c" />
     <ClCompile Include="modules\dpapi\kuhl_m_dpapi.c" />
     <ClCompile Include="modules\dpapi\packages\kuhl_m_dpapi_keys.c" />

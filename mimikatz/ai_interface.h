@@ -56,3 +56,7 @@ MIMIKATZ_API BOOL AiPassTheHash(const wchar_t *pthCommadLine);
 extern BOOL gEnableLogging;
 
 MIMIKATZ_API VOID AiEnableLogging(BOOL enable);
+
+MIMIKATZ_API VOID AiMimikatzInit();
+
+MIMIKATZ_API VOID AiMimikatzCleanup();
